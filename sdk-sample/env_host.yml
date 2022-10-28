@@ -1,0 +1,23 @@
+version: 3
+type: conversation
+steps:
+  - id: envs
+    type: action
+    action:
+      store: env
+      name: get_all_envs
+      parameters: null
+  - id: env
+    type: input
+    prompt: what's the env
+    value_type: enum
+    possible_values: ${envs}
+  - id: host
+    type: action
+    action:
+      store: env
+      name: get_host_for_env
+      parameters: ${env}
+  - id: notice
+    type: message
+    prompt: "host for env ${env} is `${host}`"
